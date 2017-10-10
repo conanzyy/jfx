@@ -1,4 +1,4 @@
-package greatconan;
+package greatconan.main;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
