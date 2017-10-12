@@ -1,7 +1,10 @@
 package com.greatconan.bean;
 
+import org.springframework.stereotype.Component;
+
 import java.io.Serializable;
 
+@Component(value="user")
 public class User implements Serializable
 {
 	public static String field_id="id";
@@ -9,6 +12,7 @@ public class User implements Serializable
 	
 	private String id;
 	private String name;
+
 
 	public String getId()
 	{
