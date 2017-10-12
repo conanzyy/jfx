@@ -1,6 +1,5 @@
 package com.greatconan;
 
-import com.greatconan.service.HttpClientService;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,17 +9,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import javax.annotation.Resource;
-
 //@Configuration
 //@EnableAutoConfiguration
 //@ComponentScan
 @SpringBootApplication
 public class Main extends Application {
     public static ConfigurableApplicationContext applicationContext;
-
-    @Resource(name = "httpClientService")
-    HttpClientService httpClientService;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -41,6 +35,8 @@ public class Main extends Application {
         //    ConfigurableApplicationContext ctx = SpringApplication.run(this.getClass());
         //    return ctx;
         //}).thenAccept(this::launchApplicationView);
+
+        System.setProperty("log.base",System.getProperty("user.dir")+"/log");
         Main.applicationContext = SpringApplication.run(Main.class);
         applicationContext.getAutowireCapableBeanFactory().autowireBean(this);
     }

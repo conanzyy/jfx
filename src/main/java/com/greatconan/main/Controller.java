@@ -1,5 +1,6 @@
 package com.greatconan.main;
 
+import com.greatconan.Main;
 import com.greatconan.service.HttpClientService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,14 +18,9 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
-
-//@Configuration
-//@EnableAutoConfiguration
-//@ComponentScan
 @SpringBootApplication
 public class Controller implements Initializable
 {
-
 	@FXML
 	private Button myButton;
 
@@ -34,11 +30,12 @@ public class Controller implements Initializable
 	@Resource(name = "httpClientService")
 	HttpClientService httpClientService;
 
+	String content="";
 	private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
+		Main.applicationContext.getAutowireCapableBeanFactory().autowireBean(this);
 	}
 
 	// When user click on myButton
@@ -53,11 +50,14 @@ public class Controller implements Initializable
 		String dateTimeString = df.format(now);
 		// Show in VIEW
 		myTextField.setText(dateTimeString);
-		httpClientService.doGet("http://www.baidu.com");
+		content=httpClientService.doGet("http://www.baidu.com");
+		LOGGER.error(content);
+
 
 	}
 
 	public void changeText(MouseEvent event){
-		myTextField.setText("");
+		myTextField.setText(content);
+
 	}
 }
