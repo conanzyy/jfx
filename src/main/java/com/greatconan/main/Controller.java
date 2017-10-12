@@ -1,21 +1,29 @@
 package com.greatconan.main;
 
+import com.greatconan.service.HttpClientService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import javax.annotation.Resource;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+//@Configuration
+//@EnableAutoConfiguration
+//@ComponentScan
+@SpringBootApplication
 public class Controller implements Initializable
 {
-
 
 	@FXML
 	private Button myButton;
@@ -23,10 +31,13 @@ public class Controller implements Initializable
 	@FXML
 	private TextField myTextField;
 
+	@Resource(name = "httpClientService")
+	HttpClientService httpClientService;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(Controller.class);
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		// TODO (don't really need to do anything here).
 
 	}
 
@@ -34,6 +45,7 @@ public class Controller implements Initializable
 	// this method will be called.
 	public void showDateTime(ActionEvent event) {
 		System.out.println("Button Clicked!");
+		LOGGER.info("Button Clicked!");
 
 		Date now= new Date();
 
@@ -41,6 +53,7 @@ public class Controller implements Initializable
 		String dateTimeString = df.format(now);
 		// Show in VIEW
 		myTextField.setText(dateTimeString);
+		httpClientService.doGet("http://www.baidu.com");
 
 	}
 

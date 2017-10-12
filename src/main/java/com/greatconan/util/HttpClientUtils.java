@@ -14,6 +14,7 @@ import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.params.CoreConnectionPNames;
+import org.springframework.stereotype.Service;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -29,6 +30,7 @@ import java.util.Set;
  * @author zhengfu wang
  *
  */
+@Service(value = "httpClientUtils")
 public class HttpClientUtils {
 	
 	// 请求超时时间 30秒
